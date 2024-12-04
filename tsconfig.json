@@ -1,0 +1,19 @@
+{
+	"compilerOptions": {
+		"module": "NodeNext",
+		"target": "ES2022",
+		"outDir": "dist",
+		"lib": ["ESNext", "DOM"],
+		"moduleResolution": "NodeNext",
+		"declaration": true,
+		"sourceMap": true,
+		"strict": true
+	},
+	"include": ["src/**/*"],
+	"exclude": ["node_modules"],
+	"typedocOptions": {
+		"entryPoints": ["./src/index.ts"],
+		"out": "docs",
+		"name": "ZenFS Archives"
+	}
+}
