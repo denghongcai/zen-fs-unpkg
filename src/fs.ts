@@ -322,6 +322,13 @@ export class UnpkgFS extends Readonly(Async(FileSystem)) {
         size: 4096,
       });
     }
+    const packageName = parsePackageName(path);
+    if (packageName) {
+      const zipFs = this._packagesOfZipFs.get(packageName);
+      if (zipFs) {
+        return await zipFs.stat(path.replace(`/${packageName}`, '') || '/');
+      }
+    }
     if (this._index.has(path)) {
       return this._index.get(path)!;
     }
@@ -346,7 +353,7 @@ export class UnpkgFS extends Readonly(Async(FileSystem)) {
     if (packageName) {
       const zipFs = this._packagesOfZipFs.get(packageName);
       if (zipFs) {
-        return await zipFs.openFile(path.replace(`/${packageName}`, ''), flag);
+        return await zipFs.openFile(path.replace(`/${packageName}`, '') || '/', flag);
       }
     }
     const arrayBuffer = await this.fetchFile(path);
@@ -366,6 +373,13 @@ export class UnpkgFS extends Readonly(Async(FileSystem)) {
     // Special case for scope packages
     if (/(\/node_modules)?(\/)(@[a-z0-9-~][a-z0-9-._~]*)/.test(path)) {
       return [];
+    }
+    const packageName = parsePackageName(path);
+    if (packageName) {
+      const zipFs = this._packagesOfZipFs.get(packageName);
+      if (zipFs) {
+        return await zipFs.readdir(path.replace(`/${packageName}`, '') || '/');
+      }
     }
     const fileMeta = await this.fetchFileMeta(path);
     if (fileMeta.type === 'directory') {
