@@ -44,6 +44,7 @@
 	"devDependencies": {
 		"@eslint/js": "^9.12.0",
 		"@types/node": "^22.10.1",
+		"@types/tar-fs": "^2.0.4",
 		"c8": "^10.1.2",
 		"eslint": "^9.12.0",
 		"globals": "^15.10.0",
@@ -57,7 +58,8 @@
 		"@zenfs/core": "^1.2.0"
 	},
 	"dependencies": {
-		"@zenfs/archives": "^0.1.0",
-		"path": "^0.12.7"
+		"@smessie/readable-web-to-node-stream": "^3.0.3",
+		"path": "^0.12.7",
+		"tar-fs": "^3.0.6"
 	}
 }
